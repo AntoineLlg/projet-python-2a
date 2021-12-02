@@ -12,7 +12,16 @@ request = youtube.channels().list(
     forUsername='dirtybiology'
 )
 
+request = youtube.search().list(
+    part="snippet",
+    eventType="completed",
+    q="dirtybiology",
+    type='video',
+    maxResults=3
+)
 response = request.execute()
 
 if __name__ == "__main__":
-    print(response)
+    for item in response['items']:
+        print("\n", item['id']
+              , item['snippet'])
