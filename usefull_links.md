@@ -12,3 +12,8 @@ https://googleapis.github.io/google-api-python-client/docs/dyn/youtube_v3.html
 https://www.youtube.com/watch?v=th5_9woFJmk&ab_channel=CoreySchafer
 
 https://www.youtube.com/watch?v=m0RWSHdS77E
+
+## Vidéo Youtube gars qui a réussi a extraire les commentaires
+
+https://www.youtube.com/watch?v=DHiTuMboqVI
+
