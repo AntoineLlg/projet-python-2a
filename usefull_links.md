@@ -17,3 +17,7 @@ https://www.youtube.com/watch?v=m0RWSHdS77E
 
 https://www.youtube.com/watch?v=DHiTuMboqVI
 
+## Analyse de sentiments
+Ici ils les font sur des tweets. La première partie c'est comment récupérer les tweets donc pas très intéressant.
+La deuxième c'est sur l'analyse de ces tweets, je pense qu'on pourra l'utliser.
+https://larevueia.fr/nlp-avec-python-analyse-de-sentiments-sur-twitter/
