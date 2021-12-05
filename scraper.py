@@ -39,7 +39,7 @@ for videoId in video_ids:
 data = pd.DataFrame(comments_list)
 
 # Stockage dans un fichier en dehors du script
-data.to_csv(path_or_buf="./comments.csv",
+data.to_csv(path_or_buf='./comments.csv',
             index=False)
 
 if __name__ == "__main__":
