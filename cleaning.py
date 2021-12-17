@@ -1,17 +1,14 @@
+import pandas
 import pandas as pd
 import re
+import nltk
+from nltk.corpus import stopwords
+import spacy
 
 data = pd.read_csv("./comments.csv")
 
-# Fonction de nettoyage très light. Si on veut plus nettoyer, utiliser le module re, voir dans liens utiles/NLP
+data["textClean"] = data.loc[:, ["textOriginal"]]
+data["textClean"] = data["textClean"].str.lower().replace('\n', ' ').replace('\r', '')
 
-def cleaning(text):
-    text = text.lower()
-    text = text.replace('\n', ' ').replace('\r', '')
-    text = ' '.join(text.split())
-    return text
-
-
-# ajout d'une colonne à data avec le texte nettoyé
-
-data[["textClean"]] = data[["textOriginal"]].apply(cleaning)
+data.to_csv(path_or_buf='./comments.csv',
+            index=False)
