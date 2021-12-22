@@ -34,6 +34,16 @@ comments_list = []
 for videoId in video_ids:
     specific_info = more_info[video_ids.index(videoId)]
     # Requête pour obtenir jusqu'à 100 (maximum autorisé par l'API) commentaires sur une vidéo YouTube
+    request = youtube.videos().list(
+        part='statistics',
+        id=videoId
+    )
+    response = request.execute()
+    stats = response['items'][0]['statistics']
+    stats.pop('favoriteCount')
+    stats['videoLikeCount'] = stats.pop('likeCount')
+    specific_info = {**stats, **specific_info}
+
     request = youtube.commentThreads().list(
         part="snippet",
         videoId=videoId,
@@ -46,6 +56,7 @@ for videoId in video_ids:
     for item in response['items']:
         snippet = item['snippet']['topLevelComment']['snippet']
         snippet['authorChannelId'] = snippet['authorChannelId']['value']  # lissage
+        snippet['commentLikeCount'] = snippet.pop('likeCount')
         comments_list.append({**snippet, **specific_info})
 
 data = pd.DataFrame(comments_list)
@@ -56,3 +67,4 @@ data.to_csv(path_or_buf='./comments.csv',
 
 if __name__ == "__main__":
     print(data)
+    print(data.columns)
