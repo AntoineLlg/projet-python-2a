@@ -36,7 +36,7 @@ for videoId in video_ids:
     # Requête pour obtenir jusqu'à 100 (maximum autorisé par l'API) commentaires sur une vidéo YouTube
     request = youtube.commentThreads().list(
         part="snippet",
-        videoId='ehmyaX0lJew',
+        videoId=videoId,
         maxResults=100,
         order='relevance'
     )
