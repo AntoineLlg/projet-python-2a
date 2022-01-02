@@ -51,3 +51,5 @@ chardet~=4.0.0
 uritemplate~=4.1.1
 textblob~=0.17.1
 matplotlib~=3.5.1
+textblob
+textblob-fr
