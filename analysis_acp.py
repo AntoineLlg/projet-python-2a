@@ -33,6 +33,7 @@ center_indices = [
     for centroid in kmeans.cluster_centers_]
 
 commentaires_representants = [comments.textOriginal[i] for i in center_indices]
+
 representants = ''
 for i, comment in enumerate(commentaires_representants):
     representants += f'{i}:{comment} \n'
