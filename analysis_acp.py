@@ -39,9 +39,9 @@ for i, comment in enumerate(commentaires_representants):
 plt.subplots(figsize=(16, 8))
 plt.subplot(121)
 sns.scatterplot(x=pca[:, 0], y=pca[:, 1], hue=kmeans.labels_, style=kmeans.labels_, s=100)
-sns.scatterplot(x = [pca[i,0] for i in center_indices],
-                y=[pca[i,1] for i in center_indices],
-                style = [i for i in range(len(center_indices))],
+sns.scatterplot(x=[pca[i, 0] for i in center_indices],
+                y=[pca[i, 1] for i in center_indices],
+                style=[i for i in range(len(center_indices))],
                 s=300)
 plt.title("ACP des commentaires + clustering")
 
@@ -49,19 +49,19 @@ plt.subplot(122)
 sns.scatterplot(x=pca[:, 0], y=pca[:, 1], hue=font, style=font, s=50)
 plt.title("ACP des commentaires par video")
 
-plt.show()
+plt.savefig('./graphs/acp1.png', format='png')
 
 hull = ConvexHull(pca)
 
-fig, axs = plt.subplots(4,5,figsize=(14, 10))
+fig, axs = plt.subplots(4, 5, figsize=(14, 10))
 for i, ax in enumerate(np.array(axs).flatten()):
-    sns.scatterplot(x=[pca[j,0] for j in range(len(font)) if font[j]==i],
-                    y=[pca[j,1] for j in range(len(font)) if font[j]==i],
+    sns.scatterplot(x=[pca[j, 0] for j in range(len(font)) if font[j] == i],
+                    y=[pca[j, 1] for j in range(len(font)) if font[j] == i],
                     s=50,
                     ax=ax)
     for simplex in hull.simplices:
-            ax.plot(pca[simplex, 0], pca[simplex, 1], 'c')
+        ax.plot(pca[simplex, 0], pca[simplex, 1], 'c')
     ax.set_title(f'Video {i+1}', fontsize=10)
     ax.axis('off')
 
-plt.show()
+plt.savefig('./graphs/acp_comparaison.png', format='png')
