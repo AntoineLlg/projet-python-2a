@@ -26,13 +26,13 @@ for i, videoid in enumerate(comments.videoId.unique()):
 
 font = [dico_font_video[videoid] for videoid in comments.videoId]
 
-kmeans = KMeans(10, n_init=30, max_iter=5000).fit(embs)
+kmeans = KMeans(5, n_init=80, max_iter=3000).fit(embs)
 
 center_indices = [
     int(np.argmin([np.sum((x-centroid)**2) for x in embs]))
     for centroid in kmeans.cluster_centers_]
 
-commentaires_representants = [comments.textOriginal[i] for i in center_indices]
+commentaires_representants = [comments.textClean[i] for i in center_indices]
 
 representants = ''
 for i, comment in enumerate(commentaires_representants):
@@ -66,3 +66,18 @@ for i, ax in enumerate(np.array(axs).flatten()):
     ax.axis('off')
 
 plt.savefig('./graphs/acp_comparaison.png', format='png')
+
+fig, ax = plt.subplots()
+for simplex in hull.simplices:
+    plt.plot(pca[simplex, 0], pca[simplex, 1], 'c')
+bound = np.array([pca[i] for i in hull.vertices])
+plt.scatter(x=bound[:, 0], y=bound[:, 1], color='r')
+for name, vect in zip(range(len(bound)), bound):
+    plt.annotate(name+1, vect)
+plt.savefig('./graphs/acp_convex_hull.png', format='png')
+
+file = open("./graphs/extreme_comments.md", 'w', encoding='utf-8')
+for i, ind in enumerate(hull.vertices):
+    line = f'{i+1} : ' + text[ind]+'  \n'
+    file.write(line)
+file.close()
