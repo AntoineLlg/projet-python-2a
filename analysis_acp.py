@@ -14,11 +14,11 @@ comments = data[['textClean', 'videoId']]
 
 text = comments["textClean"].values.tolist()
 labels = comments.index.to_list()
-
+# encodage de chaque commentaire en un vecteur de R^768 ce qui nous permettra de faire une ACP
 embs = st.encode(text)
 pca = PCA(2).fit_transform(embs)
 
-
+# Pour la légende des graphes, on identifie le numéro de video de chaque commentaire
 dico_font_video = {}
 
 for i, videoid in enumerate(comments.videoId.unique()):
@@ -26,32 +26,63 @@ for i, videoid in enumerate(comments.videoId.unique()):
 
 font = [dico_font_video[videoid] for videoid in comments.videoId]
 
-kmeans = KMeans(5, n_init=80, max_iter=3000).fit(embs)
+# On réunit les commentaires par clusters (dans R^768), qu'on affiche sur l'ACP dans R^2
+kmeans = KMeans(5, n_init=20, max_iter=3000).fit(embs)
 
 center_indices = [
     int(np.argmin([np.sum((x-centroid)**2) for x in embs]))
     for centroid in kmeans.cluster_centers_]
-
+# On récupère les commentaires les plus proches de chaque centroid
 commentaires_representants = [comments.textClean[i] for i in center_indices]
 
-representants = ''
-for i, comment in enumerate(commentaires_representants):
-    representants += f'{i}:{comment} \n'
+file = open("./graphs/represent_comments.md", 'w', encoding='utf-8')
+for i, text in enumerate(commentaires_representants):
+    line = f'{i+1} : ' + text+'  \n'
+    file.write(line)
+file.close()
+
+# Différentes visualisation (répartition des clusters et des vidéos)
 plt.subplots(figsize=(16, 8))
+
+data = pd.DataFrame(np.array([pca[:, 0], pca[:, 1], font, kmeans.labels_]).transpose(),
+                    columns=['x', 'y', 'font', 'label'])
+data = data.sample(frac=1)
+
 plt.subplot(121)
-sns.scatterplot(x=pca[:, 0], y=pca[:, 1], hue=kmeans.labels_, style=kmeans.labels_, s=100)
+sns.scatterplot(data=data,
+                x='x',
+                y='y',
+                hue='label',
+                style='label',
+                s=100,
+                hue_norm=(0, 6),
+                alpha=.8,
+                palette='hsv',
+                legend='full')
+# Centroids mis en évidence
 sns.scatterplot(x=[pca[i, 0] for i in center_indices],
                 y=[pca[i, 1] for i in center_indices],
                 style=[i for i in range(len(center_indices))],
-                s=300)
+                s=300,
+                legend=False)
 plt.title("ACP des commentaires + clustering")
 
 plt.subplot(122)
-sns.scatterplot(x=pca[:, 0], y=pca[:, 1], hue=font, style=font, s=50)
+
+sns.scatterplot(data=data,
+                x='x',
+                y='y',
+                hue='font',
+                hue_norm=(0, 23),
+                s=50,
+                palette='hsv',
+                alpha=.5,
+                legend='full')
 plt.title("ACP des commentaires par video")
 
 plt.savefig('./graphs/acp1.png', format='png')
 
+# Calcul de l'enveloppe convexe pour avoir des affichages individuels par vidéo facile à comparer entre eux
 hull = ConvexHull(pca)
 
 fig, axs = plt.subplots(4, 5, figsize=(14, 10))
@@ -67,13 +98,16 @@ for i, ax in enumerate(np.array(axs).flatten()):
 
 plt.savefig('./graphs/acp_comparaison.png', format='png')
 
+# Enveloppe convexe uniquement avec indexation pour étudier les commentaires à la frontière
 fig, ax = plt.subplots()
 for simplex in hull.simplices:
     plt.plot(pca[simplex, 0], pca[simplex, 1], 'c')
 bound = np.array([pca[i] for i in hull.vertices])
 plt.scatter(x=bound[:, 0], y=bound[:, 1], color='r')
+
 for name, vect in zip(range(len(bound)), bound):
     plt.annotate(name+1, vect)
+
 plt.savefig('./graphs/acp_convex_hull.png', format='png')
 
 file = open("./graphs/extreme_comments.md", 'w', encoding='utf-8')
