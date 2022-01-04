@@ -1,9 +1,4 @@
-# # Polarisation des commentaires
-
-
-# !pip install textblob
-# !pip install textblob-fr
-
+# Polarisation des commentaires
 
 import pandas as pd
 import numpy as np
@@ -34,4 +29,3 @@ print(text)
 print(TextBlob(text, pos_tagger=PatternTagger(), analyzer=PatternAnalyzer()).sentiment[0])
 blob = TextBlob(text)
 print(blob.sentiment)
-
