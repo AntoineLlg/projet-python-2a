@@ -4,9 +4,11 @@ from dotenv import load_dotenv
 import pandas as pd
 
 load_dotenv()
-apikey = os.getenv('APIKEY')
+apikey = os.getenv('APIKEY') # clé personnelle à configurer sur le site des API Google
 
 youtube = build('youtube', "v3", developerKey=apikey)
+
+# récupération d'informations à propos de la chaine YouTube DirtyBiology
 
 request = youtube.channels().list(
     part='statistics',
@@ -64,7 +66,3 @@ data = pd.DataFrame(comments_list)
 # Stockage dans un fichier en dehors du script
 data.to_csv(path_or_buf='./comments.csv',
             index=False)
-
-if __name__ == "__main__":
-    print(data)
-    print(data.columns)

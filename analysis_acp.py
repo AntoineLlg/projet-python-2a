@@ -10,9 +10,9 @@ from sentence_transformers import SentenceTransformer
 st = SentenceTransformer("xlm-r-bert-base-nli-stsb-mean-tokens")
 data = pd.read_csv("./comments.csv")
 
-comments = data[['textOriginal', 'videoId']]
+comments = data[['textClean', 'videoId']]
 
-text = comments["textOriginal"].values.tolist()
+text = comments["textClean"].values.tolist()
 labels = comments.index.to_list()
 
 embs = st.encode(text)
