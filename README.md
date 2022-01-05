@@ -7,7 +7,10 @@ Pour ce projet, nous nous sommes penchés sur la chaîne YouTube DirtyBiology, q
 
 Ces conditions réunies, nous devrions avoir des données exploitables pour l'étude que nous souhaitons faire : une analyse de sentiment.
 
-![DirtyBiology](https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.framesfestival.fr%2FOLD%2Fdirtybiology.html&psig=AOvVaw3S7zetuM2UJYiMA44VXLET&ust=1641497604570000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCLjfoaCtm_UCFQAAAAAdAAAAABAY)
+<center>
+![DirtyBiology](projet-python-2a/dirtybiology.png)
+[Source](https://www.pinterest.fr/pin/148689225175699166/)
+</center>
 
 ## Prérequis
 Tout d'abord, il faut lancer le `pip install -r requirements.txt` afin d'installer tous les packages nécessaires au bon fonctionnement de notre code. 
