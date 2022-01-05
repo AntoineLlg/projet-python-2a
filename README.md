@@ -8,7 +8,7 @@ Pour ce projet, nous nous sommes penchés sur la chaîne YouTube DirtyBiology, q
 Ces conditions réunies, nous devrions avoir des données exploitables pour l'étude que nous souhaitons faire : une analyse de sentiment.
 
 
-![DirtyBiology](projet-python-2a/dirtybiology.png)
+![DirtyBiology](dirtybiology.png)
 [Source](https://www.pinterest.fr/pin/148689225175699166/)
 
 
