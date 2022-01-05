@@ -6,7 +6,10 @@ Les commentaires postés sous les vidéos YouTube sont une source d'information 
 Pour ce projet, nous nous sommes penchés sur la chaîne YouTube DirtyBiology, qui fait de la vulgarisation scientifique. Notre choix a été motivé par le fait que les commentaires sous de telles vidéos sont à la fois nombreux (car la chaîne est relativement connue), constructifs (de par le contenu scientifique) et relativement corrects au niveau de la syntaxe.
 
 Ces conditions réunies, nous devrions avoir des données exploitables pour l'étude que nous souhaitons faire : une analyse de sentiment.
-### Prérequis
+
+[DirtyBiology](projet-python-2a/dirtybiology.png).
+
+## Prérequis
 Tout d'abord, il faut lancer le `pip install -r requirements.txt` afin d'installer tous les packages nécessaires au bon fonctionnement de notre code. 
 
 Pour résumer les étapes de notre travail, nous avons fait du web scraping depuis YouTube, ce pour quoi nous avons dû créer une clé API avec l'[API YouTube Data](https://developers.google.com/youtube/v3). Cela permet d'accéder aux données publiques de YouTube de manière anonyme et d'associer des requêtes API à notre projet. 
