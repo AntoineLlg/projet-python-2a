@@ -9,9 +9,9 @@ Pour ce projet, nous nous sommes penchés sur la chaîne YouTube DirtyBiology, q
 Ces conditions réunies, nous devrions avoir des données exploitables pour l'étude que nous souhaitons faire : une analyse de sentiment.  
 
 
-![DirtyBiology](logo_intro2.png#center)  
-*Logo DirtyBiology*  
-[Source](https://teespring.com/fr/stores/dirtybiology-3)
+   ![DirtyBiology](logo_intro2.png#center)  
+   *Logo DirtyBiology*  
+   [Source](https://teespring.com/fr/stores/dirtybiology-3)
 
 
 ## Prérequis
@@ -25,10 +25,12 @@ Les API Google fonctionnent avec des clés d'identification confidentielles, qui
 `APIKEY="identifiant_de_la_clé"`
 
 
+  
+
 
 **Ceci étant fait, nous avons récupéré les 100 commentaires les plus "pertinents" d'une vidéo, et ce sur 20 vidéos différentes. Ceci constitue une base de données de 2000 commentaires, ainsi que des données supplémentaires comme le nombre de likes, le nom d'utilisateur des personnes qui commentent...**
 
-> *Concernant le choix des commentaires (limités à 100 par vidéo), le paramètre `order` spécifie l'ordre dans lequel la réponse de l'API doit lister le flux de commentaires. On peut soit choisir `time` - Le flux de commentaires est sélectionné de manière chronologique. Soit `relevance` - Le flux est classé par pertinence.
+> Concernant le choix des commentaires (limités à 100 par vidéo), le paramètre `order` spécifie l'ordre dans lequel la réponse de l'API doit lister le flux de commentaires. On peut soit choisir `time` - Le flux de commentaires est sélectionné de manière chronologique. Soit `relevance` - Le flux est classé par pertinence.
 C'est ce que nous avons choisi pour l'analyse de texte.
 
 ## Conclusion
