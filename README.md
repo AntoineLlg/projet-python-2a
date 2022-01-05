@@ -24,8 +24,12 @@ Le script `scraper.py` va chercher ces données et les stocke dans le fichier `c
 Les API Google fonctionnent avec des clés d'identification confidentielles, qui n'apparaissent par conséquent pas dans le dépot GitHub. Pour faire fonctionner le script correctement, il faut créer un fichier s'apppelant `".env"` et y placer la ligne suivante :  
 `APIKEY="identifiant_de_la_clé"`
 
+
+
 **Ceci étant fait, nous avons récupéré les 100 commentaires les plus "pertinents" d'une vidéo, et ce sur 20 vidéos différentes. Ceci constitue une base de données de 2000 commentaires, ainsi que des données supplémentaires comme le nombre de likes, le nom d'utilisateur des personnes qui commentent...**
 
 > *Concernant le choix des commentaires (limités à 100 par vidéo), le paramètre `order` spécifie l'ordre dans lequel la réponse de l'API doit lister le flux de commentaires. On peut soit choisir `time` - Le flux de commentaires est sélectionné de manière chronologique. Soit `relevance` - Le flux est classé par pertinence.
 C'est ce que nous avons choisi pour l'analyse de texte.
 
+## Conclusion
+D'après les vidéos que nous avons étudiées, on voit que les commentaires sont globalement très positifs, beaucoup de remerciements en ressortent et le montage est souvent salué. Le détail de l'analyse réalisée est disponible [ici](https://github.com/taucmar/projet-python-2a/blob/main/rapport_commentaires_youtube.ipynb).
