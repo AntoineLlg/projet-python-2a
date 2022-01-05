@@ -6,10 +6,10 @@ Les commentaires postés sous les vidéos YouTube sont une source d'information 
 Pour ce projet, nous nous sommes penchés sur la chaîne YouTube DirtyBiology, qui fait de la vulgarisation scientifique. Notre choix a été motivé par le fait que les commentaires sous de telles vidéos sont à la fois nombreux (car la chaîne est relativement connue), constructifs (de par le contenu scientifique) et relativement corrects au niveau de la syntaxe.
 
 Ces conditions réunies, nous devrions avoir des données exploitables pour l'étude que nous souhaitons faire : une analyse de sentiment.  
-
+\begin{center}
 ![DirtyBiology](dirtybiology.png#center){: style="float:right"}
 [Source](https://www.pinterest.fr/pin/148689225175699166/#center){: style="float:right"}
-
+\end{center}
 
 ## Prérequis
 Tout d'abord, il faut lancer le `pip install -r requirements.txt` afin d'installer tous les packages nécessaires au bon fonctionnement de notre code. 
