@@ -8,7 +8,7 @@ commentaires informatiquement, plutôt que de les traiter un à un.
 
 Pour ce projet, nous nous sommes penchés sur la chaîne YouTube DirtyBiology, qui fait de la vulgarisation scientifique.
 Notre choix a été motivé par le fait que les commentaires sous de telles vidéos étaient à la fois nombreux (car la 
-chaîne est relativement connue), constructifs (de par le contenu scientifique) et sans trop de fautes d'ortographes.
-Cela nous permettait d'avoir des données exploitables pour l'analyse que nous voulions en faire.  
+chaîne est relativement connue), constructifs (de par le contenu scientifique) et sans trop de fautes d'orthographe.
+Ces conditions réunies, nous devrions avoir des données exploitables pour l'étude que nous souhaitons faire : une analyse de sentiment.
 ## Guideline
 ### Utilisation de l'API Youtube
