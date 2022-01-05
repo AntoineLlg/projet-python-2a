@@ -36,8 +36,8 @@ center_indices = [
 commentaires_representants = [comments.textClean[i] for i in center_indices]
 
 file = open("./graphs/represent_comments.md", 'w', encoding='utf-8')
-for i, text in enumerate(commentaires_representants):
-    line = f'{i+1} : ' + text+'  \n'
+for i, texte in enumerate(commentaires_representants):
+    line = f'{i+1} : ' + texte+'  \n'
     file.write(line)
 file.close()
 
