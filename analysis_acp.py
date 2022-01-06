@@ -30,57 +30,59 @@ font = [dico_font_video[videoid] for videoid in comments.videoId]
 kmeans = KMeans(5, n_init=20, max_iter=3000).fit(embs)
 
 center_indices = [
-    int(np.argmin([np.sum((x-centroid)**2) for x in embs]))
+    int(np.argmin([np.sum((x - centroid) ** 2) for x in embs]))
     for centroid in kmeans.cluster_centers_]
 # On récupère les commentaires les plus proches de chaque centroid
 commentaires_representants = [comments.textClean[i] for i in center_indices]
 
 file = open("./graphs/represent_comments.md", 'w', encoding='utf-8')
-for i, text in enumerate(commentaires_representants):
-    line = f'{i+1} : ' + text+'  \n'
+for i, texte in enumerate(commentaires_representants):
+    line = f'{i + 1} : ' + texte + '  \n'
     file.write(line)
 file.close()
 
 # Différentes visualisation (répartition des clusters et des vidéos)
 plt.subplots(figsize=(16, 8))
 
-data = pd.DataFrame(np.array([pca[:, 0], pca[:, 1], font, kmeans.labels_]).transpose(),
-                    columns=['x', 'y', 'font', 'label'])
-data = data.sample(frac=1)
+df_plot = pd.DataFrame(np.array([pca[:, 0], pca[:, 1], font, kmeans.labels_]).transpose(),
+                       columns=['x', 'y', 'font', 'label'])
+df_plot = df_plot.sample(frac=1)
 
-plt.subplot(121)
-sns.scatterplot(data=data,
+plt.style.use('default')
+plt.figure(figsize=(5, 5))
+sns.scatterplot(data=df_plot,
                 x='x',
                 y='y',
                 hue='label',
                 style='label',
-                s=100,
+                s=30,
                 hue_norm=(0, 6),
                 alpha=.8,
                 palette='hsv',
                 legend='full')
-# Centroids mis en évidence
+
+# Mise en avant des centroides
 sns.scatterplot(x=[pca[i, 0] for i in center_indices],
                 y=[pca[i, 1] for i in center_indices],
                 style=[i for i in range(len(center_indices))],
-                s=300,
+                s=100,
                 legend=False)
-plt.title("ACP des commentaires + clustering")
+plt.title("ACP des commentaires et clustering")
+plt.savefig("./graphs/acp_clusters.png")
 
-plt.subplot(122)
-
-sns.scatterplot(data=data,
+plt.figure(figsize=(9, 9))
+sns.scatterplot(data=df_plot,
                 x='x',
                 y='y',
-                hue='font',
+                hue=font,
                 hue_norm=(0, 23),
                 s=50,
                 palette='hsv',
                 alpha=.5,
                 legend='full')
-plt.title("ACP des commentaires par video")
+plt.title("ACP des commentaires pour les 20 videos")
 
-plt.savefig('./graphs/acp1.png', format='png')
+plt.savefig('./graphs/acp_20vid.png', format='png')
 
 # Calcul de l'enveloppe convexe pour avoir des affichages individuels par vidéo facile à comparer entre eux
 hull = ConvexHull(pca)
@@ -93,7 +95,7 @@ for i, ax in enumerate(np.array(axs).flatten()):
                     ax=ax)
     for simplex in hull.simplices:
         ax.plot(pca[simplex, 0], pca[simplex, 1], 'c')
-    ax.set_title(f'Video {i+1}', fontsize=10)
+    ax.set_title(f'Video {i + 1}', fontsize=10)
     ax.axis('off')
 
 plt.savefig('./graphs/acp_comparaison.png', format='png')
@@ -106,12 +108,36 @@ bound = np.array([pca[i] for i in hull.vertices])
 plt.scatter(x=bound[:, 0], y=bound[:, 1], color='r')
 
 for name, vect in zip(range(len(bound)), bound):
-    plt.annotate(name+1, vect)
+    plt.annotate(name + 1, vect)
 
 plt.savefig('./graphs/acp_convex_hull.png', format='png')
 
 file = open("./graphs/extreme_comments.md", 'w', encoding='utf-8')
 for i, ind in enumerate(hull.vertices):
-    line = f'{i+1} : ' + text[ind]+'  \n'
+    line = f'{i + 1} : ' + text[ind] + '  \n'
     file.write(line)
 file.close()
+
+
+def find_remerciement(string):
+    return ('merci' in string) or ('thank' in string) or ('thx' in string)
+
+
+df_plot = df_plot.sort_index()  # On remet les commentaire dans l'ordre de leurs indices
+remerciements = df_plot.iloc[[i for i in range(len(df_plot)) if find_remerciement(text[i])]]
+
+pca_remerciements = np.array(remerciements[['x','y']])
+hull_remerciements = ConvexHull(pca_remerciements)
+
+sns.scatterplot(data=remerciements,
+                x='x',
+                y='y',
+                s=200,
+                alpha=.4,
+                legend='full')
+for simplex in hull.simplices:
+    plt.plot(pca[simplex, 0], pca[simplex, 1], 'c')
+for simplex in hull_remerciements.simplices:
+    plt.plot(pca_remerciements[simplex, 0], pca_remerciements[simplex, 1], 'r')
+plt.title("Commentaires de remerciement")
+plt.savefig('./graphs/acp_remerciements.png', format='png')
