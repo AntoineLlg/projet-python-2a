@@ -54,6 +54,7 @@ Nous avons commencé par analyser les données propres aux vidéos et à l'engag
    ![image](/graphs/description_videos.png)   
    [Source](https://github.com/taucmar/projet-python-2a/tree/main/graphs)
 
+
 Une faible proportion (0.4%) des personnes qui regardent la vidéo vont y laisser un commentaire. De plus, plus la vidéo est ancienne, plus les gens qui la regardent ont tendance à la commenter.
 
 ### WordCloud
@@ -70,10 +71,12 @@ La **polarité** dans l'analyse des sentiments fait référence à **l'identific
    ![image](sentiment.png#center)   
    [Source](https://blogdigital.beijaflore.com/text-mining-analyse-de-sentiments/)
 
+
 Voici deux histogrammes de la polarité des commentaires sous une des vidéos YouTube de DirtyBiology :
 
    ![image](/graphs/histogrammes_polarites.png#center)   
    [Source](https://github.com/taucmar/projet-python-2a/tree/main/graphs)
+   
    
 Dans cette étude, nous observons des valeurs de polarités allant entre -0.2 et 1. Les histogrammes viennent confirmer le caractère positif des commentaires postés sous cette vidéo.
 
@@ -81,18 +84,21 @@ Dans cette étude, nous observons des valeurs de polarités allant entre -0.2 et
 Pour aller plus loin, une ACP permet de visualiser les différences entre les commentaires, et étudier les plus extrêmes puisque l'ACP conserve un maximum de variance. Dans un premier temps, nous utilisons la bibliothèque [Sentence Transformer](https://github.com/UKPLab/sentence-transformers) pour transformer les phrases en vecteurs réels.  
 On réunit les commentaires par **clusters**. On récupère aussi les commentaires les plus proches des centroïdes afin d'avoir des commentaires "représentants".
 
-   ![image](/graphs/acp_clusters.png#center)
+   ![image](/graphs/acp_clusters.png#center)   
+   
 Voici les commentaires correspondant aux centroïdes des clusters.  
-`0 : un régal, comme d'hab! merci pour ce très beau travail  
+>0 : un régal, comme d'hab! merci pour ce très beau travail  
 1 : édifiant...  
 et super vidéo comme d'habitude. trop fier de te soutenir sur teepee. merci à toi pour l'intelligence que tu dispense autour de toi.  
 2 : j'adore tes vidéos ! le montage est vraiment bien en plus, continue comme ça  
 3 : merci pour ton travail de recherche et de vulgarisation ❤️  
-4 : le montage est toujours aussi bon c’est ouf `  
+4 : le montage est toujours aussi bon c’est ouf  
+
+
 Même si l'ACP vise à conserver un maximum de variabilité, on voit encore que les commentaires sont tous similaires et positifs. Ceci suggère que ce qui éloigne les différents clusters les uns des autres ne réside pas dans la positivité ou négativité du commentaire.  
 
-   ![image](/graphs/acp_20vid.png#center) 
-   [Source](https://github.com/taucmar/projet-python-2a/tree/main/graphs)
+   ![image](/graphs/acp_20vid.png#center)  
+   [Source](https://github.com/taucmar/projet-python-2a/tree/main/graphs)  
 Si l'on regarde le phénomène sur l'ensemble des vidéos, nous constatons qu'aucune ne se démarque particulièrement des autres en terme de réactions dans les commentaires.  
 
 
@@ -100,11 +106,13 @@ Si l'on regarde le phénomène sur l'ensemble des vidéos, nous constatons qu'au
 Nous avons aussi voulu mettre en valeur les commentaires remerciant explicitement le vidéaste. 
 
    ![image](/graphs/acp_remerciements.png#center)   
-   [Source](https://github.com/taucmar/projet-python-2a/tree/main/graphs)
+   [Source](https://github.com/taucmar/projet-python-2a/tree/main/graphs)  
+   
 
 Finalement, les remerciements occupent quasiment tout l'espace de commentaires.
 
-## Conclusion
+## Conclusion  
+
 Il y a beaucoup de manières d'analyser informatiquement les données que YouTube met à disposition des vidéastes. Nous en avons étudié et présenté quelques unes dans ce projet.
 Nous avons commencé par analyser les données propres aux vidéos et à l'engagement qu'elles suscitent, à travers le nombre de likes et de commentaires qu'elles reçoivent. Ensuite, nous nous sommes penchés sur le contenu des commentaires. Nous avons étudié les mots qui revenaient le plus souvent, afin de dégager les thèmes majoritairement abordés par les viewers donnant leur opinion à propos de la vidéo. Ensuite, nous avons calculé et analysé la polarité des commentaires, un score entre -1 et 1 qui exprime le sentiment que dégage un commentaire. Enfin, nous avons étudié les différences entre les commentaires à l'aide d'une Analyse en Composantes Principales.
 Toutes ces analyses nous ont mené à la conclusion que les commentaires sous les vidéos de DirtyBiology sont en grande majorité positifs, parfois neutres. Parmis leurs nombreuses similarités, la communauté du YouTubeur semble exprimer une vive reconnaissance pour ses vidéos, et une appréciation particulière de la qualité de son travail, notamment l'attention portée au montage.  
