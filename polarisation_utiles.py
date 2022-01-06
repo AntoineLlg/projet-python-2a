@@ -1,15 +1,13 @@
-# Polarisation des commentaires
-
-import pandas as pd
 import numpy as np
 from textblob import TextBlob
 from textblob_fr import PatternTagger, PatternAnalyzer
 import nltk
+
 nltk.download('punkt')
 
 
 def blober(text: str) -> float:
-    '''
+    """
     Calcule la polarité d'un texte.
 
     Paramètres :
@@ -23,7 +21,7 @@ def blober(text: str) -> float:
         polarisation : score entre -1 et 1.
         Plus le score est proche de 1, plus le commentaire est positif.
         Plus il est proche de -1, plus le commentaire est négatif.
-    '''
+    """
     return TextBlob(text, pos_tagger=PatternTagger(), analyzer=PatternAnalyzer()).sentiment[0]
 
 
@@ -31,7 +29,7 @@ blober = np.vectorize(blober)
 
 
 def sentences(comment: str) -> list:
-    '''
+    """
     Découpe un texte en phrases.
 
     Paramètres :
@@ -43,13 +41,13 @@ def sentences(comment: str) -> list:
     ----------
     list[str]
         liste des phrases du texte
-    '''
+    """
     tokenizer = nltk.data.load('tokenizers/punkt/french.pickle')
     return tokenizer.tokenize(comment)
 
 
 def polarisation(comment: str) -> float:
-    '''
+    """
     Calcule la polarisation d'un commentaire en calculant d'abord la polarisation de chacune de ses
     phrases et en en faisant la moyenne
 
@@ -62,9 +60,9 @@ def polarisation(comment: str) -> float:
     ----------
     float
         moyenne des polarisations des phrases du texte
-    '''
+    """
     s = sentences(comment)
-    return np.mean(blober(s))
+    return blober(s).mean()
 
 
 polarisation = np.vectorize(polarisation)

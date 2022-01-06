@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import pandas as pd
 
 load_dotenv()
-apikey = os.getenv('APIKEY') # clé personnelle à configurer sur le site des API Google
+apikey = os.getenv('APIKEY')  # clé personnelle à configurer sur le site des API Google
 
 youtube = build('youtube', "v3", developerKey=apikey)
 
