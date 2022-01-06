@@ -1,6 +1,10 @@
 # Projet python 2A
 **Projet d'informatique de deuxième année à l'ENSAE Paris**  
 
+
+Le détail de l'analyse réalisée est disponible [dans ce Notebook](https://github.com/taucmar/projet-python-2a/blob/main/rapport_commentaires_youtube.ipynb).  
+
+
 Les commentaires postés sous les vidéos YouTube sont une source d'information pour les créateurs de contenu, ainsi que les "likes".  
 Ils permettent au vidéaste de déterminer si son travail a plu ou non à son audience. Cependant, les Youtubeurs n'ont pas nécessairement le temps de tous les lire. Il nous a donc semblé intéressant d'analyser ces commentaires informatiquement, plutôt que de les traiter un à un.
 
@@ -47,7 +51,7 @@ Le script `cleaning.py` prépare le texte aux applications des autres parties en
 ### Analyse exploratoire quantitative
 Nous avons commencé par analyser les données propres aux vidéos et à l'engagement qu'elles suscitent, à travers le nombre de likes et de commentaires qu'elles reçoivent.  
 
-   ![WordCloud](/graphs/description_videos.png)   
+   ![image](/graphs/description_videos.png)   
    [Source](https://github.com/taucmar/projet-python-2a/tree/main/graphs)
 
 Une faible proportion (0.4%) des personnes qui regardent la vidéo vont y laisser un commentaire. De plus, plus la vidéo est ancienne, plus les gens qui la regardent ont tendance à la commenter.
@@ -55,7 +59,7 @@ Une faible proportion (0.4%) des personnes qui regardent la vidéo vont y laisse
 ### WordCloud
 D'après les vidéos que nous avons étudiées, on voit que les commentaires sont globalement très positifs, beaucoup de remerciements en ressortent et le montage est souvent salué. C'est du moins ce qu'on observe dans les différents WordClouds que nous avons réalisés, par exemple : 
 
-   ![WordCloud](/graphs/logo_dirty_bio.png)   
+   ![logo](/graphs/logo_dirty_bio.png)   
    [Source](https://github.com/taucmar/projet-python-2a/tree/main/graphs)
    
    
@@ -63,48 +67,46 @@ D'après les vidéos que nous avons étudiées, on voit que les commentaires son
 Nous avons réalisé une [analyse de sentiments](https://datafranca.org/wiki/Polarité_de_sentiments), c'est-à-dire interprété et classifié les émotions (positives, négatives et neutres) dans les données textuelles à l’aide de techniques d’analyse de texte.
 La **polarité** dans l'analyse des sentiments fait référence à **l'identification de l'orientation des sentiments** dans un langage écrit : la polarité d'un commentaire est un nombre entre -1 et 1 qui "note" l'impression générale que dégage le commentaire (-1 étant très insatisfait et 1 parfaitement satisfait). 
 
-   ![WordCloud](sentiment.png#center)   
+   ![image](sentiment.png#center)   
    [Source](https://blogdigital.beijaflore.com/text-mining-analyse-de-sentiments/)
 
-Voici un histogramme de la polarité des commentaires sous une des vidéos YouTube de DirtyBiology :
+Voici deux histogrammes de la polarité des commentaires sous une des vidéos YouTube de DirtyBiology :
 
-   ![WordCloud](/graphs/histogrammes_polarites.png#center)   
+   ![image](/graphs/histogrammes_polarites.png#center)   
    [Source](https://github.com/taucmar/projet-python-2a/tree/main/graphs)
    
-Dans cette étude, nous observons des valeurs de polarités allant entre -0.2 et 1. L'histogramme vient confirmer le caractère positif des commentaires postés sous cette vidéo.
+Dans cette étude, nous observons des valeurs de polarités allant entre -0.2 et 1. Les histogrammes viennent confirmer le caractère positif des commentaires postés sous cette vidéo.
 
 ### Analyse en composantes principales
 Pour aller plus loin, une ACP permet de visualiser les différences entre les commentaires, et étudier les plus extrêmes puisque l'ACP conserve un maximum de variance. Dans un premier temps, nous utilisons la bibliothèque [Sentence Transformer](https://github.com/UKPLab/sentence-transformers) pour transformer les phrases en vecteurs réels.  
 On réunit les commentaires par **clusters**. On récupère aussi les commentaires les plus proches des centroïdes afin d'avoir des commentaires "représentants".
 
-   ![WordCloud](/graphs/acp_clusters.png#center)
-   ![WordCloud](/graphs/acp_20vid.png#center) 
+   ![image](/graphs/acp_clusters.png#center)
+Voici les commentaires correspondant aux centroïdes des clusters.  
+`0 : un régal, comme d'hab! merci pour ce très beau travail  
+1 : édifiant...  
+et super vidéo comme d'habitude. trop fier de te soutenir sur teepee. merci à toi pour l'intelligence que tu dispense autour de toi.  
+2 : j'adore tes vidéos ! le montage est vraiment bien en plus, continue comme ça  
+3 : merci pour ton travail de recherche et de vulgarisation ❤️  
+4 : le montage est toujours aussi bon c’est ouf `  
+Même si l'ACP vise à conserver un maximum de variabilité, on voit encore que les commentaires sont tous similaires et positifs. Ceci suggère que ce qui éloigne les différents clusters les uns des autres ne réside pas dans la positivité ou négativité du commentaire.  
+
+   ![image](/graphs/acp_20vid.png#center) 
+   [Source](https://github.com/taucmar/projet-python-2a/tree/main/graphs)
+Si l'on regarde le phénomène sur l'ensemble des vidéos, nous constatons qu'aucune ne se démarque particulièrement des autres en terme de réactions dans les commentaires.  
+
+
+
+Nous avons aussi voulu mettre en valeur les commentaires remerciant explicitement le vidéaste. 
+
+   ![image](/graphs/acp_remerciements.png#center)   
    [Source](https://github.com/taucmar/projet-python-2a/tree/main/graphs)
 
-Les commentaires centroïdes sont tous positifs.  
-Ceci suggère que ce qui éloigne les différents clusters les uns des autres ne réside pas dans la positivité ou négativité du commentaire.  
-
-
-Pour vérifier encore ces similarités, on affiche simultanément l'ACP pour chaque nuage de point plutôt que de les superposer.
-Afin de pouvoir les comparer visuellement facilement, on entoure les nuages de points par l'enveloppe convexe du nuage total :
-
-   ![WordCloud](/graphs/acp_comparaison.png#center)   
-   [Source](https://github.com/taucmar/projet-python-2a/tree/main/graphs)
-
-Les nuages de points semblent se déplacer de gauche à droite principalement, mais les variations ne sont pas énormes. Concrètement, les vidéos suscitent des réactions similaires. 
-
-   ![WordCloud](/graphs/acp_convex_hull.png#center)   
-   [Source](https://github.com/taucmar/projet-python-2a/tree/main/graphs)
-
-On remarque tout de suite que les commentaires de la région en haut à gauche (1, 2, 12, 13 et 14) partagent tous le même mot : *"merci"* et saluent la qualité et l'intérêt qu'ils ont pour la vidéo *('passionnant', 'enrichissant', 'intéressant', 'beau travail', 'travail de qualité')*. Les commentaires du bas sont également élogieux. Tandis que les commentaires de la région opposée intègrent du langage fleuri *(6: 'bordel', 8: 'merde')* et sont moins élogieux. Le commentaire le plus à droite semble venir d'un professeur voulant se renseigner.  
-On peut donc supposer que plus on se déplace vers la partie gauche de l'espace, plus les commentaires sont élogieux, et les remerciements nombreux.  
-Finalement, les remerciements occupent quasiment tout l'espace de commentaires
+Finalement, les remerciements occupent quasiment tout l'espace de commentaires.
 
 ## Conclusion
+Il y a beaucoup de manières d'analyser informatiquement les données que YouTube met à disposition des vidéastes. Nous en avons étudié et présenté quelques unes dans ce projet.
+Nous avons commencé par analyser les données propres aux vidéos et à l'engagement qu'elles suscitent, à travers le nombre de likes et de commentaires qu'elles reçoivent. Ensuite, nous nous sommes penchés sur le contenu des commentaires. Nous avons étudié les mots qui revenaient le plus souvent, afin de dégager les thèmes majoritairement abordés par les viewers donnant leur opinion à propos de la vidéo. Ensuite, nous avons calculé et analysé la polarité des commentaires, un score entre -1 et 1 qui exprime le sentiment que dégage un commentaire. Enfin, nous avons étudié les différences entre les commentaires à l'aide d'une Analyse en Composantes Principales.
+Toutes ces analyses nous ont mené à la conclusion que les commentaires sous les vidéos de DirtyBiology sont en grande majorité positifs, parfois neutres. Parmis leurs nombreuses similarités, la communauté du YouTubeur semble exprimer une vive reconnaissance pour ses vidéos, et une appréciation particulière de la qualité de son travail, notamment l'attention portée au montage.  
 
-Il y aurait eu beaucoup de choses à analyser, et beaucoup de manières de le faire.  
-Nous avons commencé par analyser les données propres aux vidéos et à l'engagement qu'elles suscitent, à travers le nombre de likes et de commentaires qu'elles reçoivent. Ensuite, nous nous sommes penchés sur le contenu des commentaires. Nous avons étudié les mots qui revenaient le plus souvent, afin de dégager les thèmes majoritairement abordés par les viewers donnant leur opinion sur la vidéo. Ensuite, nous avons calculé et analysé la polarité des commentaires. Enfin, nous avons étudié les différences entre les commentaires à l'aide d'une Analyse en Composantes Principales.
-Toutes ces analyses nous ont mené à la conclusion que les commentaires sous les vidéos de DirtyBiology sont en majorité positifs, se ressemblent, mais surtout sont composés en grande majorité de remerciements.  
-
-Le détail de l'analyse réalisée est disponible [sur ce Notebook](https://github.com/taucmar/projet-python-2a/blob/main/rapport_commentaires_youtube.ipynb).
 
