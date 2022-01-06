@@ -65,7 +65,7 @@ sns.scatterplot(x=[pca[i, 0] for i in center_indices],
                 style=[i for i in range(len(center_indices))],
                 s=300,
                 legend=False)
-plt.title("ACP des commentaires + clustering")
+plt.title("ACP des commentaires et clustering")
 
 plt.subplot(122)
 
