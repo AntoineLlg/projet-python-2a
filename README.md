@@ -38,7 +38,7 @@ C'est ce que nous avons choisi pour l'analyse de texte.
 ## Conclusion
 D'après les vidéos que nous avons étudiées, on voit que les commentaires sont globalement très positifs, beaucoup de remerciements en ressortent et le montage est souvent salué. C'est du moins ce qu'on observe dans les différents WordCloud que nous avons réalisés, par exemple : 
 
-   ![WordCloud](projet-python-2a/graphs/logo_dirty_bio.png)   
+   ![WordCloud](/graphs/logo_dirty_bio.png)   
    [Source](https://github.com/taucmar/projet-python-2a/tree/main/graphs)
    
    
