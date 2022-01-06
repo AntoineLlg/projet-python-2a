@@ -43,8 +43,8 @@ D'après les vidéos que nous avons étudiées, on voit que les commentaires son
    
    
 ### Polarisation des commentaires
-Nous allons de réaliser une [analyse de sentiments](https://datafranca.org/wiki/Polarité_de_sentiments), c'est-à-dire l’interprétation et la classification des émotions (positives, négatives et neutres) dans les données textuelles à l’aide de techniques d’analyse de texte.
-La **polarité** dans l'analyse des sentiments fait référence à **l'identification de l'orientation des sentiments** (positif, neutre et négatif) dans un langage écrit. La polarité d'un commentaire est un nombre entre -1 et 1 qui "note" l'impression générale du commentaire (0 étant neutre et 1 étant parfaitement satisfaisant). 
+Nous allons de réaliser une [analyse de sentiments](https://datafranca.org/wiki/Polarité_de_sentiments), c'est-à-dire interpréter et classifier des émotions (positives, négatives et neutres) dans les données textuelles à l’aide de techniques d’analyse de texte.
+La **polarité** dans l'analyse des sentiments fait référence à **l'identification de l'orientation des sentiments** dans un langage écrit : la polarité d'un commentaire est un nombre entre -1 et 1 qui "note" l'impression générale du commentaire (0 étant neutre et 1 étant parfaitement satisfaisant). 
 
    ![WordCloud](sentiment.png#center)   
    [Source](https://blogdigital.beijaflore.com/text-mining-analyse-de-sentiments/)
@@ -57,7 +57,7 @@ Voici un histogramme de la polarité des commentaires sous une vidéo YouTube de
 Dans cette étude, nous observons des valeurs de polarités allant entre -0.2 et 1. L'histogramme vient confirmer le caractère positif des commentaires postés sous les vidéos.
 
 ### Analyse en composantes principales
-Pour aller encore plus loin, nous allons faire une ACP pour visualiser les différences entre les commentaires, et étudier les plus extrêmes, puisque l'ACP conserve un maximum de variance. Dans un premier temps, nous utilisons la bibliothèque [Sentence Transformer](https://github.com/UKPLab/sentence-transformers) pour transformer les phrases en vecteurs réels. On peut ensuite encoder le texte, ce qui les transforme en vecteurs de $\mathbb{R}^{768}$, qu'on projette après dans $\mathbb{R}^{2}$.  
+Pour aller encore plus loin, nous allons faire une ACP pour visualiser les différences entre les commentaires, et étudier les plus extrêmes, puisque l'ACP conserve un maximum de variance. Dans un premier temps, nous utilisons la bibliothèque [Sentence Transformer](https://github.com/UKPLab/sentence-transformers) pour transformer les phrases en vecteurs réels.  
 On réunit les commentaires par **clusters**. On récupère aussi les commentaires les plus proches des centroïdes afin d'avoir des commentaires "représentants".
 
    ![WordCloud](/graphs/acp1.png#center)   
@@ -66,7 +66,7 @@ On réunit les commentaires par **clusters**. On récupère aussi les commentair
 Les commentaires centroides sont tous positifs.  
 Cela qui suggère que ce qui éloigne les différents clusters les uns des autres ne réside pas dans la positivité ou négativité du commentaire.  
 
-
+**COMPLETERRRRRRRR**
 Pour vérfier encore ces similarités, on affiche simultannément l'ACP pour chaque nuage de point plutôt que de les superposer.
 Afin de pouvoir les comparer visuellement facilement, on entoure les nuages de points par l'enveloppe convexe du nuage total :
 
@@ -81,5 +81,5 @@ Les nuages de points semblent se déplacer de gauche à droite principalement, m
 On remarque tout de suite que les commentaires de la région en haut à gauche (1, 2, 12, 13 et 14) partagent tous le même mot : "merci" et saluent la qualité et l'intérêt qu'ils ont pour la vidéo *('passionnant', 'enrichissant', 'intéressant', 'beau travail', 'travail de qualité')*. Les commentaires du bas sont également élogieux. Tandis que les commentaires de la région opposée intègrent du langage fleuri *(6: 'bordel', 8: 'merde')* et sont moins élogieux. Le commentaire le plus à droite semble venir d'un professeur voulant se renseigner.  
 On peut donc supposer que plus on se déplace vers la partie gauche de l'espace, plus les commentaires sont élogieux, et les remerciements nombreux.
 
-Le détail de l'analyse réalisée est disponible [ici](https://github.com/taucmar/projet-python-2a/blob/main/rapport_commentaires_youtube.ipynb).
+Le détail de l'analyse réalisée est disponible [sur ce Notebook](https://github.com/taucmar/projet-python-2a/blob/main/rapport_commentaires_youtube.ipynb).
 
