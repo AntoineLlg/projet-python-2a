@@ -44,43 +44,45 @@ file.close()
 # Différentes visualisation (répartition des clusters et des vidéos)
 plt.subplots(figsize=(16, 8))
 
-data = pd.DataFrame(np.array([pca[:, 0], pca[:, 1], font, kmeans.labels_]).transpose(),
-                    columns=['x', 'y', 'font', 'label'])
-data = data.sample(frac=1)
+df_plot = pd.DataFrame(np.array([pca[:, 0], pca[:, 1], font, kmeans.labels_]).transpose(),
+                       columns=['x', 'y', 'font', 'label'])
+df_plot = df_plot.sample(frac=1)
 
-plt.subplot(121)
-sns.scatterplot(data=data,
+plt.style.use('default')
+plt.figure(figsize=(5, 5))
+sns.scatterplot(data=df_plot,
                 x='x',
                 y='y',
                 hue='label',
                 style='label',
-                s=100,
+                s=30,
                 hue_norm=(0, 6),
                 alpha=.8,
                 palette='hsv',
                 legend='full')
-# Centroids mis en évidence
+
+# Mise en avant des centroides
 sns.scatterplot(x=[pca[i, 0] for i in center_indices],
                 y=[pca[i, 1] for i in center_indices],
                 style=[i for i in range(len(center_indices))],
-                s=300,
+                s=100,
                 legend=False)
-plt.title("ACP des commentaires + clustering")
+plt.title("ACP des commentaires et clustering")
+plt.savefig("./graphs/acp_clusters.png")
 
-plt.subplot(122)
-
-sns.scatterplot(data=data,
+plt.figure(figsize=(9, 9))
+sns.scatterplot(data=df_plot,
                 x='x',
                 y='y',
-                hue='font',
+                hue=font,
                 hue_norm=(0, 23),
                 s=50,
                 palette='hsv',
                 alpha=.5,
                 legend='full')
-plt.title("ACP des commentaires par video")
+plt.title("ACP des commentaires pour les 20 videos")
 
-plt.savefig('./graphs/acp1.png', format='png')
+plt.savefig('./graphs/acp_20vid.png', format='png')
 
 # Calcul de l'enveloppe convexe pour avoir des affichages individuels par vidéo facile à comparer entre eux
 hull = ConvexHull(pca)
@@ -121,8 +123,8 @@ def find_remerciement(string):
     return ('merci' in string) or ('thank' in string) or ('thx' in string)
 
 
-data = data.sort_index()  # On remet les commentaire dans l'ordre de leurs indices
-remerciements = data.iloc[[i for i in range(len(data)) if find_remerciement(text[i])]]
+df_plot = df_plot.sort_index()  # On remet les commentaire dans l'ordre de leurs indices
+remerciements = df_plot.iloc[[i for i in range(len(df_plot)) if find_remerciement(text[i])]]
 
 pca_remerciements = np.array(remerciements[['x','y']])
 hull_remerciements = ConvexHull(pca_remerciements)
