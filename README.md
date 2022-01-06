@@ -85,7 +85,8 @@ Pour aller plus loin, une ACP permet de visualiser les différences entre les co
 On réunit les commentaires par **clusters**. On récupère aussi les commentaires les plus proches des centroïdes afin d'avoir des commentaires "représentants".
 
    ![image](/graphs/acp_clusters.png#center)   
-   
+   [Source](https://github.com/taucmar/projet-python-2a/tree/main/graphs)  
+ 
 Voici les commentaires correspondant aux centroïdes des clusters.  
 >0 : un régal, comme d'hab! merci pour ce très beau travail  
 1 : édifiant...  
