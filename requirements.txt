@@ -28,3 +28,4 @@ scikit-learn~=1.0.2
 textblob~=0.17.1
 textblob-fr~=0.2.0
 wordcloud
+sentence_transformers
