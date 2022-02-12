@@ -1,5 +1,7 @@
 # Projet python 2A
-**Projet d'informatique de deuxième année à l'ENSAE Paris**  
+**Projet d'informatique de deuxième année à l'ENSAE Paris**
+
+Réalisé par @louisacamadini, @AntoineLlg et @yseultmasson.
 
 
 Le détail de l'analyse réalisée est disponible [dans ce Notebook](https://github.com/taucmar/projet-python-2a/blob/main/rapport_commentaires_youtube.ipynb).  
